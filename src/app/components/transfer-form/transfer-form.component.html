@@ -1,0 +1,10 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <select type="text" formControlName="fromAccountId">
+    <option [value]="fromAccountId">{{fromAccountLabel}}</option>
+  </select>
+  <select type="text" formControlName="toAccountId">
+    <option *ngFor="let account of accounts$ | async" [value]="account.id">{{account.name}}</option>
+  </select>
+  <input type="number" formControlName="amount">
+  <button type="submit">Submit</button>
+</form>

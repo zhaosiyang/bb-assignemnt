@@ -1,0 +1,11 @@
+<div class="transactions-list" *ngIf="transactions$ | async as transactions">
+  <div class="transaction-row" @fadeIn *ngFor="let transaction of transactions" [style.border-left-color]="getColor(transaction)">
+    <div class="date">{{transaction.transactionDate | date : "MMM. d"}}</div>
+    <img class="logo" [src]="transaction.merchantLogo" alt="Merchant Logo">
+    <div class="merchant-transaction-type-container">
+      <div class="merchant">{{transaction.merchant}}</div>
+      <div class="transaction-type">{{transaction.transactionType}}</div>
+    </div>
+    <div class="amount">{{transaction.amount | currency}}</div>
+  </div>
+</div>

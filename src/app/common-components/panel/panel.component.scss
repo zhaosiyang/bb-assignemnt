@@ -1,0 +1,12 @@
+.header {
+  background: purple;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .icon {
+    position: absolute;
+    left: 1rem;
+  }
+}
