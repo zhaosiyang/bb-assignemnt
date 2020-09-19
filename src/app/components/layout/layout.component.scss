@@ -1,0 +1,23 @@
+@import "variables";
+
+$horizontal-padding: 5rem;
+$vertical-padding: 3rem;
+
+:host {
+  header {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    border-bottom: 3px solid $primary-color;
+    padding: 0 $horizontal-padding;
+    img {
+      height: 2rem;
+    }
+  }
+  main {
+    background: url("../../../assets/background.jpg");
+    background-position: center;
+    background-size: cover;
+    padding: $vertical-padding $horizontal-padding;
+  }
+}

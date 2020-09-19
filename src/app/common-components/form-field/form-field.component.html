@@ -1,0 +1,5 @@
+<div class="prefix" *ngIf="inputPrefixComponent?.templateRef as templateRef">
+  <ng-container [ngTemplateOutlet]="templateRef"></ng-container>
+</div>
+
+<ng-content></ng-content>

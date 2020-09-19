@@ -1,12 +1,26 @@
-.header {
-  background: purple;
-  color: white;
-  position: relative;
+@import "variables";
+:host {
+  background: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  .icon {
-    position: absolute;
-    left: 1rem;
+  flex-direction: column;
+
+  .header {
+    flex: 0 0 auto;
+    background: $secondary-color;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon {
+      position: absolute;
+      left: 1rem;
+    }
   }
+
+  .body {
+    flex: 1 1 auto;
+    padding: 1rem;
+  }
+
 }

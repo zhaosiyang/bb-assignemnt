@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {RootState} from '../../core/reducers/root-reducer';
 import {postTransactionsLoadAction} from '../../core/actions/transaction.actions';
@@ -20,15 +20,15 @@ export class TransferFormComponent implements OnInit {
   accounts$: Observable<Account[]> = this.store.select(selectAccounts);
 
   formGroup = this.fb.group({
-    fromAccountId: [this.fromAccountId],
-    toAccountId: null,
-    amount: null
+    fromAccountId: [this.fromAccountId, Validators.required],
+    toAccountId: [null, Validators.required],
+    amount: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder, private store: Store<RootState>) { }
 
   ngOnInit(): void {
-    this.formGroup.get('fromAccountId').disable();
+    (this.formGroup.get('fromAccountId') as FormControl).disable();
   }
 
   onSubmit(): void {

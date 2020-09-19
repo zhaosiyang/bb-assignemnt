@@ -13,12 +13,16 @@ import { TransactionsViewerComponent } from './components/transactions-viewer/tr
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InlineSVGModule} from 'ng-inline-svg';
+import {HttpClientModule} from '@angular/common/http';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TransferFormComponent,
-    TransactionsViewerComponent
+    TransactionsViewerComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     EffectsModule.forRoot(rootEffects),
     ReactiveFormsModule,
     CommonComponentsModule,
+    InlineSVGModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

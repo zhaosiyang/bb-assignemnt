@@ -1,7 +1,7 @@
 <div class="header" [style.height]="headerHeight">
-  <img *ngIf="iconSrc" [src]="iconSrc" class="icon">
+  <svg-loader class="icon" *ngIf="iconSrc" [src]="iconSrc" color="white"></svg-loader>
   <div class="title">{{title}}</div>
 </div>
-<ng-content>
-
-</ng-content>
+<div class="body">
+  <ng-content></ng-content>
+</div>

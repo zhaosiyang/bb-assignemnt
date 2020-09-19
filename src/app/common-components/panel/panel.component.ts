@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-panel',
+  selector: 'bb-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,12 +24,12 @@ export class PanelComponent implements OnInit {
 
   get headerHeight(): string {
     if (this.headerSize === 'large') {
-      return '3rem';
+      return '4rem';
     }
     if (this.headerSize === 'small') {
-      return '1rem';
+      return '2rem';
     }
-    return '2rem';
+    return '3rem';
   }
 
 }

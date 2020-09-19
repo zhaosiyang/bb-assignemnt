@@ -1,7 +1,10 @@
-<app-panel [title]="'Make a Transfer'" [iconSrc]="'assets/icons/arrows.png'">
-  <app-transfer-form></app-transfer-form>
-</app-panel>
-<app-panel [title]="'Recent Transactions'" [iconSrc]="'assets/icons/briefcase.png'" [headerSize]="'large'">
-  <app-transactions-viewer></app-transactions-viewer>
-</app-panel>
-
+<app-layout>
+  <div class="content">
+    <bb-panel class="transfer" [title]="'Make a Transfer'" [iconSrc]="'assets/icons/arrows.svg'">
+      <app-transfer-form></app-transfer-form>
+    </bb-panel>
+    <bb-panel class="transactions" [title]="'Recent Transactions'" [iconSrc]="'assets/icons/briefcase.svg'" [headerSize]="'large'">
+      <app-transactions-viewer></app-transactions-viewer>
+    </bb-panel>
+  </div>
+</app-layout>

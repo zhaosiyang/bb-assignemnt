@@ -1,0 +1,14 @@
+@import "variables";
+
+select {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid $border-gray;
+  outline: none;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1rem;
+  &:focus {
+    border-bottom-color: $primary-color;
+  }
+}

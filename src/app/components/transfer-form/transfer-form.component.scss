@@ -1,0 +1,13 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  button[type=submit] {
+    margin-top: 1rem;
+  }
+}
+
+.from-account {
+  margin-top: 0;
+}
