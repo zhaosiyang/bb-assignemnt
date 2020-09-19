@@ -23,4 +23,5 @@ To run unit testing, simply run `npm test`
 - In `core` folder lives all the code about NgRx as it's the model layer of the app.
 - Common component module is for commonly-used components like button, input, panel etc.
 - `ApiService` in `api.service.ts` is the hub of calling backend API, although the responses are mocked.
+
  
