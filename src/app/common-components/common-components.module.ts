@@ -7,6 +7,7 @@ import {ButtonDirective} from './button/button.directive';
 import {InputDirective} from './input/input.directive';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { InputPrefixComponent } from './input-prefix/input-prefix.component';
+import { InputSuffixComponent } from './input-suffix/input-suffix.component';
 
 const components = [
   PanelComponent,
@@ -18,11 +19,11 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, InputSuffixComponent],
   imports: [
     CommonModule,
     InlineSVGModule,
   ],
-  exports: [...components],
+  exports: [...components, InputSuffixComponent],
 })
 export class CommonComponentsModule { }

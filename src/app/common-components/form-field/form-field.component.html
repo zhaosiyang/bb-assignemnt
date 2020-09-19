@@ -3,3 +3,7 @@
 </div>
 
 <ng-content></ng-content>
+
+<div class="suffix" *ngIf="inputSuffixComponent?.templateRef as templateRef">
+  <ng-container [ngTemplateOutlet]="templateRef"></ng-container>
+</div>

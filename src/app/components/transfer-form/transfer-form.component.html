@@ -1,8 +1,8 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+<form *ngIf="fromAccount$ | async as fromAccount" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <bb-form-field class="from-account">
     <label>
       <span>From Account</span>
-      <select *ngIf="fromAccount$ | async as fromAccount" type="text" formControlName="fromAccountId">
+      <select type="text" formControlName="fromAccountId">
         <option [value]="fromAccount.id">{{fromAccount.name}} - {{fromAccount.balance | currency}}</option>
       </select>
     </label>
@@ -21,8 +21,8 @@
       <span>Amount</span>
       <input bbInput type="number" formControlName="amount" placeholder="0.00">
     </label>
-
   </bb-form-field>
+  <div class="error" *ngIf="isOverDraft$ | async">Sorry, but you cannot overdraft more than $500.</div>
 
-  <button type="submit" bbButton="primary" [disabled]="formGroup.invalid">Submit</button>
+  <button type="submit" bbButton="primary" [disabled]="(isOverDraft$ | async) || formGroup.invalid">Submit</button>
 </form>

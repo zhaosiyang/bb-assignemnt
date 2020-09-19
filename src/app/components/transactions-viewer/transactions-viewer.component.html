@@ -1,7 +1,10 @@
 <div class="filter-and-sorter-row">
 
   <bb-form-field class="search-container">
-    <input type="text" bbInput (input)="onSearchChange($event.target.value)" placeholder="Search by typing...">
+    <input type="text" bbInput (input)="onSearchChange($event.target.value)" placeholder="Search by typing..." #input>
+    <bb-input-suffix *ngIf="input.value">
+      <button class="clear" aria-label="Clear search button" type="button" (click)="input.value = ''; onSearchChange('')">x</button>
+    </bb-input-suffix>
   </bb-form-field>
 
   <div class="sorting-container">

@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {RootState} from '../../core/reducers/root-reducer';
 import {postTransactionsLoadAction, postTransactionsLoadSuccessAction} from '../../core/actions/transaction.actions';
-import {Observable, Subscription} from 'rxjs';
+import {combineLatest, Observable, Subscription} from 'rxjs';
 import {selectFromAccount, selectToAccounts} from '../../core/selectors/accounts.selectors';
 import {Account} from '../../models/account';
 import {Actions, ofType} from '@ngrx/effects';
@@ -22,6 +22,10 @@ export class TransferFormComponent implements OnInit, OnDestroy {
     fromAccountId: [null, Validators.required],
     toAccountId: [null, Validators.required],
     amount: [null, Validators.required],
+  });
+
+  isOverDraft$: Observable<boolean> = combineLatest(this.fromAccount$, this.amountControl.valueChanges, (fromAccount, amount) => {
+    return fromAccount && amount && amount - (fromAccount.balance as number) > 500;
   });
 
   subscription = new Subscription();
