@@ -1,5 +1,58 @@
+@import "variables";
+
 :host {
   display: block;
+  .filter-and-sorter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    .search-container {
+      flex: 1 1 auto;
+      margin-right: 1rem;
+      margin-top: 0;
+    }
+    .sorting-container {
+      flex:  0 0 auto;
+      display: flex;
+      .sort-by-label {
+        line-height: 2.5rem;
+      }
+      .button-group {
+        margin-left: 1rem;
+        display: flex;
+        border: 1px solid $border-gray;
+        button {
+          background: white;
+          border: none;
+          text-transform: uppercase;
+          height: 2.5rem;
+          line-height: 2.5rem;
+          padding: 0 1.5rem;
+          position: relative;
+
+          .caret {
+            position: absolute;
+            right: 0.25rem;
+            top: 0.45rem;
+            opacity: 0;
+            transition: transform 200ms ease-out;
+            &.up {
+              opacity: 1;
+            }
+            &.down {
+              opacity: 1;
+              transform: rotate(180deg);
+            }
+          }
+
+        }
+        button + button {
+          border-left: 1px solid $border-gray;
+        }
+      }
+    }
+  }
   .transactions-list {
     border: 1px solid grey;
     .transaction-row {

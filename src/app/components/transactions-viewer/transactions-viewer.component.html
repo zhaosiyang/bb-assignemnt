@@ -1,11 +1,50 @@
-<div class="transactions-list" *ngIf="transactions$ | async as transactions">
-  <div class="transaction-row" @fadeIn *ngFor="let transaction of transactions" [style.border-left-color]="getColor(transaction)">
-    <div class="date">{{transaction.transactionDate | date : "MMM. d"}}</div>
-    <img class="logo" [src]="transaction.merchantLogo" alt="Merchant Logo">
-    <div class="merchant-transaction-type-container">
-      <div class="merchant">{{transaction.merchant}}</div>
-      <div class="transaction-type">{{transaction.transactionType}}</div>
+<div class="filter-and-sorter-row">
+
+  <bb-form-field class="search-container">
+    <input type="text" bbInput (input)="onSearchChange($event.target.value)" placeholder="Search by typing...">
+  </bb-form-field>
+
+  <div class="sorting-container">
+    <div class="sort-by-label">Sort By</div>
+    <div class="button-group">
+      <button (click)="onSortClicked(SortKey.Date)">
+        <span>Date</span>
+        <svg-loader class="caret"
+                    [class.up]="sortKey$.value === SortKey.Date && sortDirection$.value === SortDirection.Asc"
+                    [class.down]="sortKey$.value === SortKey.Date && sortDirection$.value === SortDirection.Desc"
+                    src="assets/icons/caret-up.svg"></svg-loader>
+      </button>
+      <button (click)="onSortClicked(SortKey.Beneficiary)">
+        <span>Beneficiary</span>
+        <svg-loader class="caret"
+                    [class.up]="sortKey$.value === SortKey.Beneficiary && sortDirection$.value === SortDirection.Asc"
+                    [class.down]="sortKey$.value === SortKey.Beneficiary && sortDirection$.value === SortDirection.Desc"
+                    src="assets/icons/caret-up.svg"></svg-loader>
+
+      </button>
+      <button (click)="onSortClicked(SortKey.Amount)">
+        <span>Amount</span>
+        <svg-loader class="caret"
+                    [class.up]="sortKey$.value === SortKey.Amount && sortDirection$.value === SortDirection.Asc"
+                    [class.down]="sortKey$.value === SortKey.Amount && sortDirection$.value === SortDirection.Desc"
+                    src="assets/icons/caret-up.svg"></svg-loader>
+      </button>
     </div>
-    <div class="amount">{{transaction.amount | currency}}</div>
   </div>
+
+
 </div>
+
+<ng-container *ngIf="sortedFilteredTransactions$ | async as transactions">
+  <div class="transactions-list" *ngIf="transactions.length">
+    <div class="transaction-row" @fadeIn *ngFor="let transaction of transactions" [style.border-left-color]="getColor(transaction)">
+      <div class="date">{{transaction.transactionDate | date : "MMM. d"}}</div>
+      <img class="logo" [src]="transaction.merchantLogo" alt="Merchant Logo">
+      <div class="merchant-transaction-type-container">
+        <div class="merchant">{{transaction.merchant}}</div>
+        <div class="transaction-type">{{transaction.transactionType}}</div>
+      </div>
+      <div class="amount">{{transaction.amount | currency}}</div>
+    </div>
+  </div>
+</ng-container>
