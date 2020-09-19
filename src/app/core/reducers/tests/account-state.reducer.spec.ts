@@ -1,5 +1,4 @@
 import {AccountState, accountStateReducer} from '../account-state.reducer';
-import {createDefaultLoadable} from '../../../utils/loadable';
 import {getAccountsLoadAction, getAccountsLoadErrorAction, getAccountsLoadSuccessAction} from '../../actions/account.actions';
 
 describe('Account State Reducer', () => {
