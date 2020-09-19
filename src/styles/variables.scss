@@ -4,3 +4,14 @@ $secondary-color: rgb(0, 119, 139);
 $background-gray: rgb(227, 231, 234);
 $border-gray: rgb(209, 204, 200);
 $text-gray: rgb(197, 191, 185);
+
+@mixin screen-medium() {
+  @media only screen and (min-width: 600px) {
+    @content;
+  }
+}
+@mixin screen-large() {
+  @media only screen and (min-width: 1000px) {
+    @content;
+  }
+}

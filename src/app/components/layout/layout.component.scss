@@ -1,7 +1,13 @@
 @import "variables";
 
-$horizontal-padding: 5rem;
-$vertical-padding: 3rem;
+$horizontal-padding-lg: 5rem;
+$vertical-padding-lg: 3rem;
+
+$horizontal-padding-md: 3rem;
+$vertical-padding-md: 2rem;
+
+$horizontal-padding-sm: 1rem;
+$vertical-padding-sm: 1rem;
 
 $header-height: 4rem;
 
@@ -12,7 +18,14 @@ $header-height: 4rem;
     align-items: center;
     height: $header-height;
     border-bottom: 3px solid $primary-color;
-    padding: 0 $horizontal-padding;
+
+    padding: 0 $horizontal-padding-sm;
+    @include screen-medium {
+      padding: 0 $horizontal-padding-md;
+    }
+    @include screen-large {
+      padding: 0 $horizontal-padding-lg;
+    }
     img {
       height: 2rem;
     }
@@ -22,6 +35,13 @@ $header-height: 4rem;
     background: url("../../../assets/background.jpg");
     background-position: center;
     background-size: cover;
-    padding: $vertical-padding $horizontal-padding;
+
+    padding: $vertical-padding-sm $horizontal-padding-sm;
+    @include screen-medium {
+      padding: $vertical-padding-md $horizontal-padding-md;
+    }
+    @include screen-large {
+      padding: $vertical-padding-lg $horizontal-padding-lg;
+    }
   }
 }

@@ -3,15 +3,16 @@
 :host {
   display: block;
   .filter-and-sorter-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
     margin-bottom: 1rem;
+
     .search-container {
       flex: 1 1 auto;
       margin-right: 1rem;
       margin-top: 0;
+      margin-bottom: 1rem;
     }
+
     .sorting-container {
       flex:  0 0 auto;
       display: flex;
@@ -52,6 +53,16 @@
         }
       }
     }
+
+    @include screen-medium {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .search-container {
+        margin-bottom: 0;
+      }
+    }
+
   }
   .transactions-list {
     border: 1px solid grey;

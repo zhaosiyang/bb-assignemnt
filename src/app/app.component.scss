@@ -1,11 +1,23 @@
+@import "variables";
+
 .content {
-  display: flex;
-  align-items: flex-start;
-  .transfer {
-    flex: 2 2 0;
-  }
+  display: block;
   .transactions {
-    flex: 5 5 0;
-    margin-left: 2rem;
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+
+  @include screen-large {
+    display: flex;
+    align-items: flex-start;
+    .transfer {
+      flex: 2 2 0;
+    }
+    .transactions {
+      flex: 5 5 0;
+      margin-left: 2rem;
+      margin-top: 0;
+    }
   }
 }
+
