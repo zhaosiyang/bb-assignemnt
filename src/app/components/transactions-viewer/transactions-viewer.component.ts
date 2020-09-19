@@ -6,7 +6,7 @@ import {Store} from '@ngrx/store';
 import {RootState} from '../../core/reducers/root-reducer';
 import {stringToColor} from '../../utils/string-to-color';
 import {createFadeInAnimation} from '../../animations/fade-in-out';
-import {debounceTime} from 'rxjs/operators';
+import {debounceTime, map} from 'rxjs/operators';
 import {SortDirection, SortKey} from './sort';
 
 @Component({
@@ -27,12 +27,14 @@ export class TransactionsViewerComponent implements OnInit {
   SortKey = SortKey;
   SortDirection = SortDirection;
 
-  filteredTransactions$: Observable<Transaction[]> = combineLatest(
+  filteredTransactions$: Observable<Transaction[]> = combineLatest([
     this.transactions$,
-    this.search$.pipe(debounceTime(200)),
-    (transactions, search) => {
-    return transactions.filter(transaction => this.transactionMatchSearch(transaction, search));
-  });
+    this.search$.pipe(debounceTime(200))
+  ]).pipe(
+    map(([transactions, search]) => {
+      return transactions.filter(transaction => this.transactionMatchSearch(transaction, search));
+    })
+  );
 
   SORT_PREDICATE = {
     [SortKey.Date]: (transaction: Transaction) => transaction.transactionDate,
@@ -40,22 +42,25 @@ export class TransactionsViewerComponent implements OnInit {
     [SortKey.Beneficiary]: (transaction: Transaction) => transaction.merchant,
   };
 
-  sortedFilteredTransactions$: Observable<Transaction[]> = combineLatest(
+  sortedFilteredTransactions$: Observable<Transaction[]> = combineLatest([
     this.filteredTransactions$,
     this.sortKey$,
     this.sortDirection$,
-    (transactions, sortKey, sortDirection) => {
-    if (!sortKey) {
-      return transactions;
-    }
-    const sorter = sortDirection === SortDirection.Asc ?
-      (transaction1, transaction2) => this.SORT_PREDICATE[sortKey](transaction1) > this.SORT_PREDICATE[sortKey](transaction2) ? 1 : -1
-      :
-      (transaction1, transaction2) => this.SORT_PREDICATE[sortKey](transaction1) > this.SORT_PREDICATE[sortKey](transaction2) ? -1 : 1;
-    return ([...transactions]).sort(sorter);
-  });
+  ]).pipe(
+    map(([transactions, sortKey, sortDirection]) => {
+      if (!sortKey) {
+        return transactions;
+      }
+      const sorter = sortDirection === SortDirection.Asc ?
+        (transaction1, transaction2) => this.SORT_PREDICATE[sortKey](transaction1) > this.SORT_PREDICATE[sortKey](transaction2) ? 1 : -1
+        :
+        (transaction1, transaction2) => this.SORT_PREDICATE[sortKey](transaction1) > this.SORT_PREDICATE[sortKey](transaction2) ? -1 : 1;
+      return ([...transactions]).sort(sorter);
+    }),
+  );
 
-  constructor(private store: Store<RootState>) { }
+  constructor(private store: Store<RootState>) {
+  }
 
   ngOnInit(): void {
   }
@@ -80,7 +85,7 @@ export class TransactionsViewerComponent implements OnInit {
 
   // Assumption: searchable on merchant, transactionType and amount
   private transactionMatchSearch(transaction: Transaction, search: string): boolean {
-    const filterPredicate = (t: Transaction) => `${transaction.merchant} ${transaction.transactionType} ${transaction.amount}`.toLowerCase();
+    const filterPredicate = (t: Transaction) => `${t.merchant} ${t.transactionType} ${t.amount}`.toLowerCase();
     return filterPredicate(transaction).indexOf(search.toLowerCase()) !== -1;
   }
 

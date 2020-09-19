@@ -7,6 +7,7 @@ import {combineLatest, Observable, Subscription} from 'rxjs';
 import {selectFromAccount, selectToAccounts} from '../../core/selectors/accounts.selectors';
 import {Account} from '../../models/account';
 import {Actions, ofType} from '@ngrx/effects';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-transfer-form',
@@ -24,9 +25,11 @@ export class TransferFormComponent implements OnInit, OnDestroy {
     amount: [null, Validators.required],
   });
 
-  isOverDraft$: Observable<boolean> = combineLatest(this.fromAccount$, this.amountControl.valueChanges, (fromAccount, amount) => {
-    return fromAccount && amount && amount - (fromAccount.balance as number) > 500;
-  });
+  isOverDraft$: Observable<boolean> = combineLatest([this.fromAccount$, this.amountControl.valueChanges]).pipe(
+    map(([fromAccount, amount]) => {
+      return fromAccount && amount && amount - (fromAccount.balance as number) > 500;
+    })
+  );
 
   subscription = new Subscription();
 
@@ -43,7 +46,7 @@ export class TransferFormComponent implements OnInit, OnDestroy {
         this.toAccountIdControl.setValue(null);
         this.amountControl.setValue(null);
       })
-    )
+    );
   }
 
   ngOnInit(): void {
