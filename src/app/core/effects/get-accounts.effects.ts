@@ -11,7 +11,7 @@ export class GetAccountsEffects {
   onLoad$ = createEffect(() => this.actions$.pipe(
     ofType(getAccountsLoadAction),
     switchMap(() => this.apiService.getAccounts().pipe(
-      map(accounts => getAccountsLoadSuccessAction({accounts})),
+      map(({fromAccount, toAccounts}) => getAccountsLoadSuccessAction({toAccounts, fromAccount})),
       catchError(error => of(getAccountsLoadErrorAction({error}))),
     )),
   ));

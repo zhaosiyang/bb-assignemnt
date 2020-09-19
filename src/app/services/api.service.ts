@@ -24,27 +24,34 @@ export class ApiService {
       id: '1000',
       amount,
       categoryCode: '#12345',
-      merchant: 'Kern\'s supermarket',
+      merchant: 'Mocked Merchant',
       merchantLogo: 'https://miro.medium.com/max/3150/1*J6dAFhmDK2BKMlHc-qD8fg.jpeg',
       transactionDate: Date.now(),
       transactionType: 'Card Payment',
     });
   }
 
-  getAccounts(): Observable<Account[]> {
-    return of([
-      {
-        id: generateRandomId(),
-        name: 'TD Visa Card',
+  getAccounts(): Observable<{ fromAccount: Account, toAccounts: Account[] }> {
+    return of({
+      fromAccount: {
+        id: '123456789',
+        name: 'Kern\'s checking account',
+        balance: 15421.8,
       },
-      {
-        id: generateRandomId(),
-        name: 'Rogers Communication Family Account',
-      },
-      {
-        id: generateRandomId(),
-        name: 'RBC MasterCard',
-      }
-    ]);
+      toAccounts: [
+        {
+          id: generateRandomId(),
+          name: 'TD Visa Card',
+        },
+        {
+          id: generateRandomId(),
+          name: 'Rogers Communication Family Account',
+        },
+        {
+          id: generateRandomId(),
+          name: 'RBC MasterCard',
+        }
+      ]
+    });
   }
 }

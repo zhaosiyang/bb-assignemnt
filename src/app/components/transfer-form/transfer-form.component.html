@@ -2,8 +2,8 @@
   <bb-form-field class="from-account">
     <label>
       <span>From Account</span>
-      <select type="text" formControlName="fromAccountId">
-        <option [value]="fromAccountId">{{fromAccountLabel}}</option>
+      <select *ngIf="fromAccount$ | async as fromAccount" type="text" formControlName="fromAccountId">
+        <option [value]="fromAccount.id">{{fromAccount.name}} - {{fromAccount.balance | currency}}</option>
       </select>
     </label>
   </bb-form-field>
@@ -11,7 +11,7 @@
     <label>
       <span>To Account</span>
       <select type="text" formControlName="toAccountId">
-        <option *ngFor="let account of accounts$ | async" [value]="account.id">{{account.name}}</option>
+        <option *ngFor="let account of toAccounts$ | async" [value]="account.id">{{account.name}}</option>
       </select>
     </label>
   </bb-form-field>

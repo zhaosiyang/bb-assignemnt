@@ -7,5 +7,5 @@ export const getTransactionsLoadSuccessAction = createAction('[Transactions Page
 export const getTransactionsLoadErrorAction = createAction('[Transactions Page] Get Transactions Load Error', props<{error: HttpErrorResponse}>());
 
 export const postTransactionsLoadAction = createAction('[Transactions Page] Post Transactions Load', props<{fromAccountId: string; toAccountId: string; amount: number}>());
-export const postTransactionsLoadSuccessAction = createAction('[Transactions Page] Post Transactions Load Success', props<{transaction: Transaction}>());
+export const postTransactionsLoadSuccessAction = createAction('[Transactions Page] Post Transactions Load Success', props<{transaction: Transaction, amount: number}>());
 export const postTransactionsLoadErrorAction = createAction('[Transactions Page] Post Transactions Load Error', props<{error: HttpErrorResponse}>());
