@@ -18,6 +18,8 @@ export class TransferFormComponent implements OnInit, OnDestroy {
 
   toAccounts$: Observable<Account[]> = this.store.select(selectToAccounts);
   fromAccount$: Observable<Account | null> = this.store.select(selectFromAccount);
+  fromAccount: Account;
+  toAccounts: Account[];
 
   formGroup = this.fb.group({
     fromAccountId: [null, Validators.required],
@@ -37,9 +39,13 @@ export class TransferFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.fromAccount$.subscribe(fromAccount => {
         if (fromAccount) {
+          this.fromAccount = fromAccount;
           this.fromAccountControl.setValue(fromAccount.id);
         }
       }),
+    );
+    this.subscription.add(
+      this.toAccounts$.subscribe(toAccounts => this.toAccounts = toAccounts),
     );
     this.subscription.add(
       this.actions$.pipe(ofType(postTransactionsLoadSuccessAction)).subscribe(() => {
@@ -66,7 +72,10 @@ export class TransferFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.store.dispatch(postTransactionsLoadAction(this.formGroup.value));
+    const toAccount = this.toAccounts.find(account => account.id === this.toAccountIdControl.value) as Account;
+    if (confirm(`[Design not given, use the simple pop up for now] You are going to transfer $${this.amountControl.value} from ${this.fromAccount.name} to ${toAccount.name}, please confirm.`)) {
+      this.store.dispatch(postTransactionsLoadAction(this.formGroup.value));
+    }
   }
 
   ngOnDestroy(): void {
