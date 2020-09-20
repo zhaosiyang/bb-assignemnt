@@ -18,7 +18,7 @@ To run unit testing, simply run `npm test`
 - On top of NgRx, I create the concept of "Loadable" which is mainly to represent the state of an API call. 3 fields `loading`, `success` and `error` represents all the states of an API call. There are a bunch of handy functions in `lodable.ts` created around "Loadable" to minimize boilerplate.
 - In `core` folder lives all the code about NgRx as it's the model layer of the app.
 - Common component module is for commonly-used components like button, input, panel etc.
-- `ApiService` in `api.service.ts` is the hub of calling backend API, although the responses are mocked.
+- `ApiService` in `api.service.ts` is the hub of calling backend API, the responses are mocked though.
 
 ### Miscellaneous
 - Multi-language support is not implemented here because of lack of time, but I have used `ngx-translate` a lot in my previous project.
