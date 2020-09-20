@@ -10,26 +10,11 @@
   <div class="sorting-container">
     <div class="sort-by-label">Sort By</div>
     <div class="button-group">
-      <button type="button" (click)="onSortClicked(SortKey.Date)">
-        <span>Date</span>
+      <button *ngFor="let sortKey of SortKey | enumToArray" type="button" (click)="onSortClicked(sortKey)">
+        <span>{{getSortKeyLabel(sortKey)}}</span>
         <svg-loader class="caret"
-                    [class.up]="sortKey$.value === SortKey.Date && sortDirection$.value === SortDirection.Asc"
-                    [class.down]="sortKey$.value === SortKey.Date && sortDirection$.value === SortDirection.Desc"
-                    src="assets/icons/caret-up.svg"></svg-loader>
-      </button>
-      <button type="button" (click)="onSortClicked(SortKey.Beneficiary)">
-        <span>Beneficiary</span>
-        <svg-loader class="caret"
-                    [class.up]="sortKey$.value === SortKey.Beneficiary && sortDirection$.value === SortDirection.Asc"
-                    [class.down]="sortKey$.value === SortKey.Beneficiary && sortDirection$.value === SortDirection.Desc"
-                    src="assets/icons/caret-up.svg"></svg-loader>
-
-      </button>
-      <button type="button" (click)="onSortClicked(SortKey.Amount)">
-        <span>Amount</span>
-        <svg-loader class="caret"
-                    [class.up]="sortKey$.value === SortKey.Amount && sortDirection$.value === SortDirection.Asc"
-                    [class.down]="sortKey$.value === SortKey.Amount && sortDirection$.value === SortDirection.Desc"
+                    [class.up]="sortKey$.value === sortKey && sortDirection$.value === SortDirection.Asc"
+                    [class.down]="sortKey$.value === sortKey && sortDirection$.value === SortDirection.Desc"
                     src="assets/icons/caret-up.svg"></svg-loader>
       </button>
     </div>

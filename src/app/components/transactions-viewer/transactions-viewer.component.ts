@@ -7,7 +7,7 @@ import {RootState} from '../../core/reducers/root-reducer';
 import {stringToColor} from '../../utils/string-to-color';
 import {createFadeInAnimation} from '../../animations/fade-in-out';
 import {debounceTime, map} from 'rxjs/operators';
-import {SortDirection, SortKey} from './sort';
+import {getSortKeyLabel, SortDirection, SortKey} from './sort';
 
 @Component({
   selector: 'app-transactions-viewer',
@@ -26,6 +26,7 @@ export class TransactionsViewerComponent implements OnInit {
 
   SortKey = SortKey;
   SortDirection = SortDirection;
+  getSortKeyLabel = getSortKeyLabel;
 
   filteredTransactions$: Observable<Transaction[]> = combineLatest([
     this.transactions$,
